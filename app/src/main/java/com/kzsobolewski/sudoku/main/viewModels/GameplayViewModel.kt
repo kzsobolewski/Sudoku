@@ -30,12 +30,8 @@ class GameplayViewModel(private val repository: SudokuBoardRepository) : ViewMod
         board.postValue(newBoard)
     }
 
-    fun validateBoard() {
-        if (board.value?.validate9x9() == true)
-            ;
-        else
-        ;
-    }
+    fun validateBoard(): Boolean =
+        board.value?.validate9x9() == false
 
     init {
         try {

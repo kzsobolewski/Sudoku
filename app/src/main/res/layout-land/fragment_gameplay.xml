@@ -17,11 +17,13 @@
 
         <com.kzsobolewski.sudoku.main.views.GameBoardView
             android:id="@+id/gameBoardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/gridLayout"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> viewModel.validateBoard()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/gridLayout"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,9 +34,9 @@
             android:layout_gravity="center"
             android:layout_margin="24dp"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@id/validateButton"
+            app:layout_constraintBottom_toBottomOf="@id/validateButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/OneButton"
@@ -115,11 +117,11 @@
             android:id="@+id/validateButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="@string/check_validate_button"
+            android:text="Check"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gridLayout"
-            app:layout_constraintStart_toStartOf="@id/gridLayout" />
+            app:layout_constraintStart_toStartOf="@id/gridLayout"
+            app:layout_constraintTop_toBottomOf="@id/gridLayout" />
+        <!--            android:onClick="@{() -> viewModel.validateBoard()}"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

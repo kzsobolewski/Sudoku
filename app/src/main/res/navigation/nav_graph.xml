@@ -9,7 +9,7 @@
         android:id="@+id/menuFragment"
         android:name="com.kzsobolewski.sudoku.main.fragments.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menuFragment_to_gameplayFragment"
             app:destination="@id/gameplayFragment"
@@ -22,5 +22,19 @@
         android:id="@+id/gameplayFragment"
         android:name="com.kzsobolewski.sudoku.main.fragments.GameplayFragment"
         android:label="fragment_gameplay"
-        tools:layout="@layout/fragment_gameplay" />
+        tools:layout="@layout/fragment_gameplay">
+        <action
+            android:id="@+id/action_gameplayFragment_to_gameFinishedDialogFragment"
+            app:destination="@id/gameFinishedDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/gameFinishedDialogFragment"
+        android:name="com.kzsobolewski.sudoku.main.fragments.GameFinishedDialogFragment"
+        android:label="GameFinishedDialogFragment">
+        <action
+            android:id="@+id/action_gameFinishedDialogFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:popUpTo="@id/menuFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 </navigation>

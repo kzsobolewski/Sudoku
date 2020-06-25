@@ -12,32 +12,32 @@ class LineCheckTest {
 
     @Test
     fun `lineCheck of (9,8,7,6,5,4,3,1,2) should equal true`() {
-        assertEquals(true, board.lineCheck(listOf(9, 8, 7, 6, 5, 4, 3, 1, 2)))
+        assertEquals(true, board.lineCheck(intArrayOf(9, 8, 7, 6, 5, 4, 3, 1, 2)))
     }
 
     @Test
     fun `lineCheck of (1,2,3,4,5,6,7,8,9) should equal true`() {
-        assertEquals(true, board.lineCheck(listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)))
+        assertEquals(true, board.lineCheck(intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9)))
     }
 
     @Test
     fun `lineCheck of empty list should equal false`() {
-        assertEquals(false, board.lineCheck(listOf()))
+        assertEquals(false, board.lineCheck(intArrayOf()))
     }
 
     @Test
-    fun `lineCheck of list with 0 should equal true2`() {
-        assertEquals(false, board.lineCheck(listOf(0, 2, 3, 4, 5, 6, 7, 8, 9)))
+    fun `lineCheck of list with 0 should equal false`() {
+        assertEquals(false, board.lineCheck(intArrayOf(0, 2, 3, 4, 5, 6, 7, 8, 9)))
     }
 
     @Test
     fun `lineCheck of list with only zeros should equal false`() {
-        assertEquals(false, board.lineCheck(listOf(0, 0, 0, 0, 0, 0, 0, 0, 0)))
+        assertEquals(false, board.lineCheck(intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0)))
     }
 
     @Test
     fun `lineCheck of list with one duplication should equal false`() {
-        assertEquals(false, board.lineCheck(listOf(9, 8, 7, 6, 5, 4, 3, 1, 8)))
+        assertEquals(false, board.lineCheck(intArrayOf(9, 8, 7, 6, 5, 4, 3, 1, 8)))
     }
 
 }
