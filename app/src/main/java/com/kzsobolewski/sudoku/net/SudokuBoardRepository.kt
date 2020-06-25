@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SudokuBoardRepository: SudokuBoardApi {
+class SudokuBoardRepository : SudokuBoardApi {
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         if (BuildConfig.BUILD_TYPE == "debug")

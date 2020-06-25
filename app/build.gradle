@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 def scriptsDir = "$project.rootDir/scripts/"
 apply from: "$scriptsDir/config.gradle"
@@ -26,8 +27,8 @@ android {
         }
     }
 
-    buildFeatures {
-        dataBinding true
+    dataBinding {
+        enabled = true
     }
 
     compileOptions {

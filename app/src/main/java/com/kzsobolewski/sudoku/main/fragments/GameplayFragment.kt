@@ -26,14 +26,12 @@ class GameplayFragment : Fragment(), GameBoardView.OnClickListener {
                 lifecycleOwner = viewLifecycleOwner
                 gameBoardView.registerListener(this@GameplayFragment)
             }
+        binding.viewModel = viewModel
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.currentPosition.observe(viewLifecycleOwner) {
-            binding.gameBoardView.updateCurrentPosition(it)
-        }
         viewModel.board.observe(viewLifecycleOwner) {
             binding.gameBoardView.updateBoard(it)
         }

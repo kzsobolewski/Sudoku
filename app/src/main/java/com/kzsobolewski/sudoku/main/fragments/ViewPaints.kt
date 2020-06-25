@@ -30,6 +30,7 @@ class ViewPaints(private val resources: Resources) {
     }
 
     val selectedCirclePaint = Paint().apply {
+        isAntiAlias = true
         style = Paint.Style.FILL
         color = ResourcesCompat.getColor(
             resources,
@@ -38,7 +39,8 @@ class ViewPaints(private val resources: Resources) {
     }
 
     val fixedCirclePaint = Paint().apply {
-        style = Paint.Style.STROKE
+        isAntiAlias = true
+        style = Paint.Style.FILL_AND_STROKE
         strokeWidth = 4f
         color = ResourcesCompat.getColor(
             resources,
@@ -47,6 +49,7 @@ class ViewPaints(private val resources: Resources) {
     }
 
     val textPaint = Paint().apply {
+        isAntiAlias = true
         style = Paint.Style.FILL_AND_STROKE
         color = ResourcesCompat.getColor(
             resources,

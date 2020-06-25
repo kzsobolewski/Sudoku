@@ -18,20 +18,10 @@ class GameBoardView @JvmOverloads constructor(
 ) : View(context, attributeSet, defStyleAttr) {
 
     private val viewPaints = ViewPaints(resources)
-
-    private val boxSize = 3
-    private val boardSize = 9
-
     private var cellSizePixels = 0f
-
-    private var selectedRow = -1
-    private var selectedColumn = -1
     private lateinit var listener: OnClickListener
 
-    private var cells: Array<Array<Rect>> =
-        Array(boardSize) { Array(boardSize) { Rect(0, 0, 0, 0) } }
-    private var cellsData: Array<IntArray> = Array(boardSize) { IntArray(boardSize) { 0 } }
-
+    private var viewBoard: Board? = null
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -41,18 +31,18 @@ class GameBoardView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        cellSizePixels = (width / boardSize).toFloat()
-        makeCells()
-        canvas?.let {
+        cellSizePixels = (width / Board.BOARD_SIZE).toFloat()
+        if (viewBoard != null && canvas != null) {
+            setCellRects()
             drawLines(canvas)
             fillCells(canvas)
         }
     }
 
-    private fun makeCells() {
-        (0 until boardSize).forEach { row ->
-            (0 until boardSize).forEach { column ->
-                cells[row][column] = Rect(
+    private fun setCellRects() {
+        (0 until Board.BOARD_SIZE).forEach { row ->
+            (0 until Board.BOARD_SIZE).forEach { column ->
+                viewBoard?.cells?.get(row)?.get(column)?.rect = Rect(
                     row * cellSizePixels.toInt(),
                     column * cellSizePixels.toInt(),
                     (row + 1) * cellSizePixels.toInt(),
@@ -62,19 +52,20 @@ class GameBoardView @JvmOverloads constructor(
         }
     }
 
+
     private fun fillCells(canvas: Canvas) {
-        (0 until boardSize).forEach { row ->
-            (0 until boardSize).forEach { column ->
-                val boardValue = cellsData[row][column]
-                val paintToUse =
-                    if (row == selectedRow && column == selectedColumn)
-                        viewPaints.selectedCirclePaint
-                    else if (boardValue != 0)
-                        viewPaints.fixedCirclePaint
-                    else viewPaints.circlePaint
-                drawCell(canvas, cells[row][column], paintToUse)
-                if (boardValue != 0)
-                    drawTextInsideRectangle(canvas, cells[row][column], boardValue)
+        (0 until Board.BOARD_SIZE).forEach { row ->
+            (0 until Board.BOARD_SIZE).forEach { column ->
+                viewBoard?.cells?.get(row)?.get(column)?.let { cell ->
+                    val paintToUse = when {
+                        cell.type == CellType.FIXED -> viewPaints.fixedCirclePaint
+                        row to column == viewBoard?.currentPosition -> viewPaints.selectedCirclePaint
+                        else -> viewPaints.circlePaint
+                    }
+                    drawCell(canvas, cell.rect, paintToUse)
+                    if (cell.value != 0)
+                        drawTextInsideRectangle(canvas, cell.rect, cell.value)
+                }
             }
         }
     }
@@ -89,7 +80,6 @@ class GameBoardView @JvmOverloads constructor(
         )
     }
 
-
     private fun drawTextInsideRectangle(canvas: Canvas, rect: Rect, digit: Int) {
         val str = digit.toString()
         val xOffset = viewPaints.textPaint.measureText(str) * 0.5f
@@ -99,10 +89,9 @@ class GameBoardView @JvmOverloads constructor(
         canvas.drawText(str, textX, textY, viewPaints.textPaint)
     }
 
-
     private fun drawLines(canvas: Canvas) {
-        (1 until boardSize).forEach {
-            if (it % boxSize == 0) {
+        (1 until Board.BOARD_SIZE).forEach {
+            if (it % Board.BOX_SIZE == 0) {
                 canvas.drawLine(
                     it * cellSizePixels,
                     0f,
@@ -136,17 +125,9 @@ class GameBoardView @JvmOverloads constructor(
         return true
     }
 
-    fun updateCurrentPosition(position: Position) {
-        selectedRow = position.first
-        selectedColumn = position.second
+    fun updateBoard(board: Board?) {
+        viewBoard = board
         invalidate()
-    }
-
-    fun updateBoard(boardData: Array<IntArray>?) {
-        boardData?.let {
-            cellsData = boardData
-            invalidate()
-        }
     }
 
     fun registerListener(listener: OnClickListener) {

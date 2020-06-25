@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.kzsobolewski.sudoku.main.viewModels.GameplayViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,73 +32,94 @@
             android:layout_gravity="center"
             android:layout_margin="24dp"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/validateButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
+                android:id="@+id/OneButton"
                 style="@style/PickNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
                 android:layout_column="0"
+                android:onClick="@{() -> viewModel.changeCellValue(1)}"
                 android:text="1" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="0"
                 android:layout_column="1"
+                android:onClick="@{() -> viewModel.changeCellValue(2)}"
                 android:text="2" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="0"
                 android:layout_column="2"
+                android:onClick="@{() -> viewModel.changeCellValue(3)}"
                 android:text="3" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="0"
                 android:layout_column="3"
+                android:onClick="@{() -> viewModel.changeCellValue(4)}"
                 android:text="4" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="0"
                 android:layout_column="4"
+                android:onClick="@{() -> viewModel.changeCellValue(5)}"
                 android:text="5" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="1"
                 android:layout_column="0"
+                android:onClick="@{() -> viewModel.changeCellValue(6)}"
                 android:text="6" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="1"
                 android:layout_column="1"
+                android:onClick="@{() -> viewModel.changeCellValue(7)}"
                 android:text="7" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="1"
                 android:layout_column="2"
+                android:onClick="@{() -> viewModel.changeCellValue(8)}"
                 android:text="8" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="1"
                 android:layout_column="3"
+                android:onClick="@{() -> viewModel.changeCellValue(9)}"
                 android:text="9" />
 
             <Button
                 style="@style/PickNumberButton"
                 android:layout_row="1"
                 android:layout_column="4"
+                android:onClick="@{() -> viewModel.changeCellValue(0)}"
                 android:text="X" />
 
-
         </GridLayout>
+
+        <Button
+            android:id="@+id/validateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:onClick="@{() -> viewModel.validateBoard()}"
+            android:text="Check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
