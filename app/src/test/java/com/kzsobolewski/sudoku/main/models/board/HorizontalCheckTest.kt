@@ -1,8 +1,8 @@
-package com.kzsobolewski.sudoku
+package com.kzsobolewski.sudoku.main.models.board
 
-import com.kzsobolewski.sudoku.main.viewModels.ApiResponseMapper
-import com.kzsobolewski.sudoku.main.views.Board
-import com.kzsobolewski.sudoku.main.views.Cell
+import com.kzsobolewski.sudoku.main.utils.ApiResponseMapper
+import com.kzsobolewski.sudoku.main.models.Board
+import com.kzsobolewski.sudoku.main.models.Cell
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -13,11 +13,12 @@ class HorizontalCheckTest {
 
     @Before
     fun initBoard() {
-        board = Board(Array(Board.BOARD_SIZE) {
-            Array(Board.BOARD_SIZE) {
-                Cell()
-            }
-        })
+        board =
+            Board(Array(Board.BOARD_SIZE) {
+                Array(Board.BOARD_SIZE) {
+                    Cell()
+                }
+            })
     }
 
     @Test

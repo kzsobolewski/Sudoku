@@ -3,8 +3,10 @@ package com.kzsobolewski.sudoku.main.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kzsobolewski.sudoku.main.views.Board
-import com.kzsobolewski.sudoku.main.views.CellType
+import com.kzsobolewski.sudoku.main.models.Board
+import com.kzsobolewski.sudoku.main.utils.ApiResponseMapper
+import com.kzsobolewski.sudoku.main.utils.NetworkBoardState
+import com.kzsobolewski.sudoku.main.utils.CellType
 import com.kzsobolewski.sudoku.main.views.Position
 import com.kzsobolewski.sudoku.net.SudokuBoardRepository
 import com.kzsobolewski.sudoku.net.SudokuDifficulty

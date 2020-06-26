@@ -7,7 +7,10 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.kzsobolewski.sudoku.main.fragments.ViewPaints
+import com.kzsobolewski.sudoku.main.utils.ViewPaints
+import com.kzsobolewski.sudoku.main.models.Board
+import com.kzsobolewski.sudoku.main.models.Cell
+import com.kzsobolewski.sudoku.main.utils.CellType
 
 typealias Position = Pair<Int, Int>
 
@@ -17,7 +20,8 @@ class GameBoardView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attributeSet, defStyleAttr) {
 
-    private val viewPaints = ViewPaints(resources)
+    private val viewPaints =
+        ViewPaints(resources)
     private var cellSizePixels = 0f
     private lateinit var listener: OnClickListener
 

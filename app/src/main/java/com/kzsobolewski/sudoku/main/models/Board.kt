@@ -1,4 +1,7 @@
-package com.kzsobolewski.sudoku.main.views
+package com.kzsobolewski.sudoku.main.models
+
+import com.kzsobolewski.sudoku.main.utils.CellType
+import com.kzsobolewski.sudoku.main.views.Position
 
 class Board(var cells: Array<Array<Cell>>) {
 
@@ -35,7 +38,9 @@ class Board(var cells: Array<Array<Cell>>) {
         cells.all { row -> lineCheck(row.map { it.value }.toIntArray()) }
 
     fun verticalCheck(): Boolean {
-        val result = Array(BOARD_SIZE) { IntArray(BOARD_SIZE) { 0 } }
+        val result = Array(BOARD_SIZE) { IntArray(
+            BOARD_SIZE
+        ) { 0 } }
         (0 until BOARD_SIZE).forEach { row ->
             (0 until BOARD_SIZE).forEach { column ->
                 result[row][column] = cells[column][row].value

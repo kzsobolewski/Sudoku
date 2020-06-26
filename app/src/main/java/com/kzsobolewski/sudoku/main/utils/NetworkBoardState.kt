@@ -1,4 +1,4 @@
-package com.kzsobolewski.sudoku.main.viewModels
+package com.kzsobolewski.sudoku.main.utils
 
 
 enum class NetworkBoardState {

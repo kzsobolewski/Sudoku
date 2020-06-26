@@ -11,7 +11,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.kzsobolewski.sudoku.main.viewModels.NetworkBoardState" />
+        <import type="com.kzsobolewski.sudoku.main.utils.NetworkBoardState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

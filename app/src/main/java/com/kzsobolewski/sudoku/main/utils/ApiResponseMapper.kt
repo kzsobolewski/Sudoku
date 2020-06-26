@@ -1,8 +1,7 @@
-package com.kzsobolewski.sudoku.main.viewModels
+package com.kzsobolewski.sudoku.main.utils
 
-import com.kzsobolewski.sudoku.main.views.Board
-import com.kzsobolewski.sudoku.main.views.Cell
-import com.kzsobolewski.sudoku.main.views.CellType
+import com.kzsobolewski.sudoku.main.models.Board
+import com.kzsobolewski.sudoku.main.models.Cell
 import com.kzsobolewski.sudoku.net.SudokuApiResponse
 
 
@@ -11,11 +10,12 @@ class ApiResponseMapper {
     companion object {
 
         fun sudokuApiResponseToBoard(input: SudokuApiResponse): Board {
-            val board = Board(Array(Board.BOARD_SIZE) {
+            val board = Board(
                 Array(Board.BOARD_SIZE) {
-                    Cell()
-                }
-            })
+                    Array(Board.BOARD_SIZE) {
+                        Cell()
+                    }
+                })
             val inputArray = input.values.first()
             (0 until Board.BOARD_SIZE).forEach { row ->
                 (0 until Board.BOARD_SIZE).forEach { column ->

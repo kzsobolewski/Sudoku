@@ -1,7 +1,7 @@
-package com.kzsobolewski.sudoku
+package com.kzsobolewski.sudoku.main.models.board
 
 
-import com.kzsobolewski.sudoku.main.views.Board
+import com.kzsobolewski.sudoku.main.models.Board
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

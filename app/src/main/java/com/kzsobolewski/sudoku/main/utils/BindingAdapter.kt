@@ -1,4 +1,4 @@
-package com.kzsobolewski.sudoku.main
+package com.kzsobolewski.sudoku.main.utils
 
 import android.view.View
 import androidx.core.view.isVisible

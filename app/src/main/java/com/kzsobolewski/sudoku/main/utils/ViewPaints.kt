@@ -1,4 +1,4 @@
-package com.kzsobolewski.sudoku.main.fragments
+package com.kzsobolewski.sudoku.main.utils
 
 import android.content.res.Resources
 import android.graphics.Paint

@@ -1,4 +1,4 @@
-package com.kzsobolewski.sudoku.main.views
+package com.kzsobolewski.sudoku.main.utils
 
 enum class CellType {
     FIXED,
