@@ -4,4 +4,6 @@
     <string name="exit_dialog_button">Exit</string>
     <string name="game_finished_dialog_text">You win! Congratulations!</string>
     <string name="check_validate_button">Check</string>
+    <string name="wrong_completed_toast_text">Sudoku is not filled properly</string>
+    <string name="network_error">Network Error</string>
 </resources>

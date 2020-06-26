@@ -1,5 +1,6 @@
 package com.kzsobolewski.sudoku.net
 
+import android.util.Log
 import com.kzsobolewski.sudoku.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,7 +28,12 @@ class SudokuBoardRepository : SudokuBoardApi {
 
     private val service: SudokuBoardApi = retrofit.create(SudokuBoardApi::class.java)
 
-    override suspend fun getBoard(difficulty: SudokuDifficulty): SudokuApiResponse {
-        return service.getBoard(difficulty)
+    override suspend fun getBoard(difficulty: SudokuDifficulty): SudokuApiResponse? {
+        return try {
+            service.getBoard(difficulty)
+        } catch (e: Exception) {
+            Log.e(SudokuBoardRepository::class.simpleName, e.localizedMessage, e)
+            null
+        }
     }
 }

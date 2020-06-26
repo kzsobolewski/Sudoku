@@ -39,14 +39,13 @@ class GameplayFragment : Fragment(), GameBoardView.OnClickListener {
         viewModel.board.observe(viewLifecycleOwner) {
             binding.gameBoardView.updateBoard(it)
         }
-
         validateButton.setOnClickListener {
             if (viewModel.validateBoard())
                 findNavController().navigate(R.id.action_gameplayFragment_to_gameFinishedDialogFragment)
             else
                 Toast.makeText(
                     requireContext(),
-                    "Sudoku is not filled properly",
+                    resources.getText(R.string.wrong_completed_toast_text),
                     Toast.LENGTH_SHORT
                 ).show()
         }

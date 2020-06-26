@@ -12,13 +12,11 @@ class GameFinishedDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-
             builder.setMessage(R.string.game_finished_dialog_text)
                 .setPositiveButton(R.string.exit_dialog_button) { _, _ ->
                     findNavController()
                         .navigate(R.id.action_gameFinishedDialogFragment_to_menuFragment)
                 }
-
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

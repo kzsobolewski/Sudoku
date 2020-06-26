@@ -27,6 +27,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:isVisible="@{viewModel.isLoaded == NetworkBoardState.LOADING}"
+            app:layout_constraintBottom_toBottomOf="@id/gameBoardView"
+            app:layout_constraintEnd_toEndOf="@id/gameBoardView"
+            app:layout_constraintStart_toStartOf="@id/gameBoardView"
+            app:layout_constraintTop_toTopOf="@id/gameBoardView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/network_error"
+            app:isVisible="@{viewModel.isLoaded == NetworkBoardState.ERROR}"
+            app:layout_constraintBottom_toBottomOf="@id/gameBoardView"
+            app:layout_constraintEnd_toEndOf="@id/gameBoardView"
+            app:layout_constraintStart_toStartOf="@id/gameBoardView"
+            app:layout_constraintTop_toTopOf="@id/gameBoardView" />
+
         <GridLayout
             android:id="@+id/gridLayout"
             android:layout_width="wrap_content"
@@ -122,6 +142,5 @@
             app:layout_constraintEnd_toEndOf="@id/gridLayout"
             app:layout_constraintStart_toStartOf="@id/gridLayout"
             app:layout_constraintTop_toBottomOf="@id/gridLayout" />
-        <!--            android:onClick="@{() -> viewModel.validateBoard()}"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

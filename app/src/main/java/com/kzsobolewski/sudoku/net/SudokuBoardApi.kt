@@ -6,7 +6,8 @@ import retrofit2.http.Query
 typealias SudokuApiResponse = Map<String, Array<IntArray>>
 
 interface SudokuBoardApi {
+
     @GET("/board")
-    suspend fun getBoard(@Query("difficulty") difficulty: SudokuDifficulty): SudokuApiResponse
+    suspend fun getBoard(@Query("difficulty") difficulty: SudokuDifficulty): SudokuApiResponse?
 
 }

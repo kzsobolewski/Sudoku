@@ -1,6 +1,5 @@
 package com.kzsobolewski.sudoku.main.viewModels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +14,7 @@ import kotlinx.coroutines.launch
 class GameplayViewModel(private val repository: SudokuBoardRepository) : ViewModel() {
 
     val board = MutableLiveData<Board>()
+    val isLoaded = MutableLiveData(NetworkBoardState.LOADING)
 
     fun updatePosition(position: Position) {
         if (board.value?.getCellType(position) != CellType.FIXED) {
@@ -31,17 +31,18 @@ class GameplayViewModel(private val repository: SudokuBoardRepository) : ViewMod
     }
 
     fun validateBoard(): Boolean =
-        board.value?.validate9x9() == false
+        board.value?.validate9x9() == true
 
     init {
-        try {
-            viewModelScope.launch {
-                val response = repository.getBoard(SudokuDifficulty.easy)
+        viewModelScope.launch {
+            val response = repository.getBoard(SudokuDifficulty.easy)
+            if (response == null) {
+                isLoaded.postValue(NetworkBoardState.ERROR)
+            } else {
                 val newBoard = ApiResponseMapper.sudokuApiResponseToBoard(response)
                 board.postValue(newBoard)
+                isLoaded.postValue(NetworkBoardState.LOADED)
             }
-        } catch (e: Exception) {
-            Log.e(GameplayViewModel::class.simpleName, e.localizedMessage, e)
         }
     }
 }

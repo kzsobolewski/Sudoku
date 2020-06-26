@@ -52,43 +52,6 @@ class GameBoardView @JvmOverloads constructor(
         }
     }
 
-
-    private fun fillCells(canvas: Canvas) {
-        (0 until Board.BOARD_SIZE).forEach { row ->
-            (0 until Board.BOARD_SIZE).forEach { column ->
-                viewBoard?.cells?.get(row)?.get(column)?.let { cell ->
-                    val paintToUse = when {
-                        cell.type == CellType.FIXED -> viewPaints.fixedCirclePaint
-                        row to column == viewBoard?.currentPosition -> viewPaints.selectedCirclePaint
-                        else -> viewPaints.circlePaint
-                    }
-                    drawCell(canvas, cell.rect, paintToUse)
-                    if (cell.value != 0)
-                        drawTextInsideRectangle(canvas, cell.rect, cell.value)
-                }
-            }
-        }
-    }
-
-
-    private fun drawCell(canvas: Canvas, rect: Rect, paint: Paint) {
-        canvas.drawCircle(
-            rect.exactCenterX(),
-            rect.exactCenterY(),
-            cellSizePixels / 2 - 8,
-            paint
-        )
-    }
-
-    private fun drawTextInsideRectangle(canvas: Canvas, rect: Rect, digit: Int) {
-        val str = digit.toString()
-        val xOffset = viewPaints.textPaint.measureText(str) * 0.5f
-        val yOffset = viewPaints.textPaint.fontMetrics.ascent * -0.4f
-        val textX = rect.exactCenterX() - xOffset
-        val textY = rect.exactCenterY() + yOffset
-        canvas.drawText(str, textX, textY, viewPaints.textPaint)
-    }
-
     private fun drawLines(canvas: Canvas) {
         (1 until Board.BOARD_SIZE).forEach {
             if (it % Board.BOX_SIZE == 0) {
@@ -110,6 +73,47 @@ class GameBoardView @JvmOverloads constructor(
         }
     }
 
+    private fun fillCells(canvas: Canvas) {
+        (0 until Board.BOARD_SIZE).forEach { row ->
+            (0 until Board.BOARD_SIZE).forEach { column ->
+                viewBoard?.cells?.get(row)?.get(column)?.let { cell ->
+                    drawSelectedCell(canvas, row to column, cell)
+                    drawTextInsideRectangle(canvas, cell.rect, cell.value)
+                }
+            }
+        }
+    }
+
+    private fun drawSelectedCell(canvas: Canvas, position: Position, cell: Cell) {
+        val paintToUse = when {
+            cell.type == CellType.FIXED -> viewPaints.fixedCirclePaint
+            position == viewBoard?.currentPosition -> viewPaints.selectedCirclePaint
+            else -> viewPaints.circlePaint
+        }
+        drawCell(canvas, cell.rect, paintToUse)
+    }
+
+
+    private fun drawCell(canvas: Canvas, rect: Rect, paint: Paint) {
+        val cellMargin = 8
+        canvas.drawCircle(
+            rect.exactCenterX(),
+            rect.exactCenterY(),
+            cellSizePixels / 2 - cellMargin,
+            paint
+        )
+    }
+
+    private fun drawTextInsideRectangle(canvas: Canvas, rect: Rect, digit: Int) {
+        if (digit != 0) {
+            val str = digit.toString()
+            val xOffset = viewPaints.textPaint.measureText(str) * 0.5f
+            val yOffset = viewPaints.textPaint.fontMetrics.ascent * -0.4f
+            val textX = rect.exactCenterX() - xOffset
+            val textY = rect.exactCenterY() + yOffset
+            canvas.drawText(str, textX, textY, viewPaints.textPaint)
+        }
+    }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return when (event?.action) {
